@@ -32,14 +32,14 @@ param appServiceSku string = 'F1'
 ])
 param openAiSku string = 'S0'
 
-@description('Git repository URL for the chat application. This defaults to the [`azure-samples/cosmosdb-chatgpt`](https://github.com/azure-samples/cosmosdb-chatgpt) repository.')
-param appGitRepository string = 'https://github.com/azure-samples/cosmosdb-chatgpt.git'
+@description('Git repository URL for the chat application. This defaults to the [`fshammout/cosmosdb-chatgpt`](https://github.com/fshammout/cosmosdb-chatgpt) repository.')
+param appGitRepository string = 'https://github.com/fshammout/cosmosdb-chatgpt.git'
 
-@description('Git repository branch for the chat application. This defaults to the [**main** branch of the `azure-samples/cosmosdb-chatgpt`](https://github.com/azure-samples/cosmosdb-chatgpt/tree/main) repository.')
+@description('Git repository branch for the chat application. This defaults to the [**main** branch of the `fshammout/cosmosdb-chatgpt`](https://github.com/fshammout/cosmosdb-chatgpt/tree/main) repository.')
 param appGetRepositoryBranch string = 'main'
 
 var openAiSettings = {
-  name: '${name}-openai'
+  name: '${name}-oai'
   sku: openAiSku
   maxConversationTokens: '2000'
   model: {
@@ -52,7 +52,7 @@ var openAiSettings = {
 }
 
 var cosmosDbSettings = {
-  name: '${name}-cosmos-nosql'
+  name: '${name}-cosmos-postgresql'
   enableFreeTier: cosmosDbEnableFreeTier
   database: {
     name: 'chatdatabase'
@@ -97,7 +97,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' = {
   }
 }
 
-resource cosmosDbDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2022-08-15' = {
+resource cosmosDbDatabase 'Microsoft.DocumentDB/databaseAccounts/postgresqlDatabases@2022-08-15' = {
   parent: cosmosDbAccount
   name: cosmosDbSettings.database.name
   properties: {
@@ -107,7 +107,7 @@ resource cosmosDbDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@20
   }
 }
 
-resource cosmosDbContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-08-15' = {
+resource cosmosDbContainer 'Microsoft.DocumentDB/databaseAccounts/postgresqlDatabases/containers@2022-08-15' = {
   parent: cosmosDbDatabase
   name: cosmosDbSettings.container.name
   properties: {
