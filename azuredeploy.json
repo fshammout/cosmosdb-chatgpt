@@ -86,7 +86,7 @@
       }
     },
     "cosmosDbSettings": {
-      "name": "[format('{0}-cosmos-nosql', parameters('name'))]",
+      "name": "[format('{0}-cosmos-postgresql', parameters('name'))]",
       "enableFreeTier": "[parameters('cosmosDbEnableFreeTier')]",
       "database": {
         "name": "chatdatabase"
