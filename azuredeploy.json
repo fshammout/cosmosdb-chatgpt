@@ -59,16 +59,16 @@
     },
     "appGitRepository": {
       "type": "string",
-      "defaultValue": "https://github.com/azure-samples/cosmosdb-chatgpt.git",
+      "defaultValue": "https://github.com/fshammout/cosmosdb-chatgpt.git",
       "metadata": {
-        "description": "Git repository URL for the chat application. This defaults to the [`azure-samples/cosmosdb-chatgpt`](https://github.com/azure-samples/cosmosdb-chatgpt) repository."
+        "description": "Git repository URL for the chat application. This defaults to the [`fshammout/cosmosdb-chatgpt`](https://github.com/fshammout/cosmosdb-chatgpt) repository."
       }
     },
     "appGetRepositoryBranch": {
       "type": "string",
       "defaultValue": "main",
       "metadata": {
-        "description": "Git repository branch for the chat application. This defaults to the [**main** branch of the `azure-samples/cosmosdb-chatgpt`](https://github.com/azure-samples/cosmosdb-chatgpt/tree/main) repository."
+        "description": "Git repository branch for the chat application. This defaults to the [**main** branch of the `fshammout/cosmosdb-chatgpt`](https://github.com/fshammout/cosmosdb-chatgpt/tree/main) repository."
       }
     }
   },
@@ -133,7 +133,7 @@
       }
     },
     {
-      "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases",
+      "type": "Microsoft.DocumentDB/databaseAccounts/postgresqlDatabases",
       "apiVersion": "2022-08-15",
       "name": "[format('{0}/{1}', variables('cosmosDbSettings').name, variables('cosmosDbSettings').database.name)]",
       "properties": {
@@ -146,7 +146,7 @@
       ]
     },
     {
-      "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+      "type": "Microsoft.DocumentDB/databaseAccounts/postgresqlDatabases/containers",
       "apiVersion": "2022-08-15",
       "name": "[format('{0}/{1}/{2}', variables('cosmosDbSettings').name, variables('cosmosDbSettings').database.name, variables('cosmosDbSettings').container.name)]",
       "properties": {
@@ -182,7 +182,7 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('cosmosDbSettings').name, variables('cosmosDbSettings').database.name)]"
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts/postgresqlDatabases', variables('cosmosDbSettings').name, variables('cosmosDbSettings').database.name)]"
       ]
     },
     {
